@@ -1,11 +1,15 @@
-
-
+/**
+ * Draws a polygon of n sides about the origin
+ *
+ * @param n_sides
+ * @returns {Array}
+ */
 function getCoordinates(n_sides) {
     var coords = [];
 
     for (var n = 0; n < n_sides; n++) {
-        var x = Math.cos(n * 2 * Math.PI / n_sides) + 1;
-        var y = Math.sin(-n * 2 * Math.PI / n_sides) + 1;
+        var x = Math.cos(n * 2 * Math.PI / n_sides);
+        var y = Math.sin(-n * 2 * Math.PI / n_sides);
 
         coords.push([x, y]);
     }
@@ -13,15 +17,30 @@ function getCoordinates(n_sides) {
     return coords;
 }
 
-function polygonPoints(coords, magnitude) {
+/**
+ * Creates the points attribute for an SVG <polygon>
+ *
+ * @param n_sides Number of sides the polygon has
+ * @param magnitude The size of the shape
+ * @returns {string}
+ */
+function polygonPoints(n_sides, magnitude) {
+    var coords = getCoordinates(n_sides);
     var Points = '';
+
     coords.forEach(function (coord) {
-        Points += parseInt(Math.round(coord[0]*magnitude)) + ',' + parseInt(Math.round(coord[1]*magnitude)) + ' ';
+        Points += parseInt(Math.round((coord[0] + 1)*magnitude)) + ',' + parseInt(Math.round((coord[1] + 1)*magnitude)) + ' ';
     });
 
     return Points;
 }
 
+/**
+ * Names a polygon of n sides
+ *
+ * @param n_sides
+ * @returns {*}
+ */
 function polygonName(n_sides) {
     var names = {
         1: "Point",
