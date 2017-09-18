@@ -13,7 +13,7 @@
     <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-    <form target="#" id="form">
+    <form id="form">
         <div style="margin-bottom: 30px">
             <label style="font-size: 28px">
                 How many sides?
@@ -45,7 +45,6 @@
             $('.wrapper').draggable();
 
             $('#form').submit(function (event) {
-                event.preventDefault();
                 var n = parseInt($('#numSides').val());
                 if (n > 100) n = 100; //If you get too big, it will crash.
                 if (n < 3) return void(0); //Don't draw lines or points.
@@ -60,6 +59,8 @@
                 });
 
                 $body.append($svg.append($polygon).append($text).draggable()).html($body.html());
+
+                event.preventDefault();
             });
         });
     </script>

@@ -99,3 +99,7 @@ label.green {
     background: green;
     color: white;
 }
+
+label.radio.selected {
+    border-color: black;
+}

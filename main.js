@@ -2,19 +2,21 @@
  * Draws a polygon of n sides about the origin
  *
  * @param n_sides
+ * @param ϕ
  * @returns {Array}
  */
-function getCoordinates(n_sides) {
-    var coords = [];
+function getCoordinates(n_sides, ϕ) {
+    var coordinates = [];
+    ϕ = ϕ || Math.random() * Math.PI;
 
     for (var n = 0; n < n_sides; n++) {
-        var x = Math.cos(n * 2 * Math.PI / n_sides);
-        var y = Math.sin(-n * 2 * Math.PI / n_sides);
+        var x = Math.cos(ϕ + (n * 2 * Math.PI / n_sides));
+        var y = Math.sin(ϕ + (n * 2 * Math.PI / n_sides));
 
-        coords.push([x, y]);
+        coordinates.push([x, y]);
     }
 
-    return coords;
+    return coordinates;
 }
 
 /**
@@ -25,11 +27,11 @@ function getCoordinates(n_sides) {
  * @returns {string}
  */
 function polygonPoints(n_sides, magnitude) {
-    var coords = getCoordinates(n_sides);
+    var coordinates = getCoordinates(n_sides);
     var Points = '';
 
-    coords.forEach(function (coord) {
-        Points += parseInt(Math.round((coord[0] + 1)*magnitude)) + ',' + parseInt(Math.round((coord[1] + 1)*magnitude)) + ' ';
+    coordinates.forEach(function (P) {
+        Points += parseInt(Math.round((P[0] + 1)*magnitude)) + ',' + parseInt(Math.round((P[1] + 1)*magnitude)) + ' ';
     });
 
     return Points;
